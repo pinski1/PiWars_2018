@@ -3,12 +3,10 @@
  * 
  * Parts list:
  *   1off Teensy 3.2
- *   1off QTR-8RC sensor array (upgrade to QTR-8A?)
  *   3off AS5048A encoder
- *   2off ZTW Spider 30A Opto Small
+ *   3off ZTW Spider 30A Opto Small ESC
  *   2off Turnigy XK2445-4700kv & 47:1 25mm gearbox
- *   1off ??? brushed ESC
- *   1off ??? & 2040:1 25mm gearbox
+ *   1off MultiStar V-Spec 2205-2350kv & 2040:1 25mm gearbox
  *   4off VL53L0X ToF ranger finders
  * 
  */
@@ -43,14 +41,6 @@
 #define SERVO_OUT_2     -1 // arm motor
 #define SERVO_OUT_3     -1 // ball catcher
 #define SERVO_OUT_4     -1 // ball launcher
-#define LINE_SEN_0      -1 // line sensors
-#define LINE_SEN_1      -1
-#define LINE_SEN_2      -1
-#define LINE_SEN_3      -1
-#define LINE_SEN_4      -1
-#define LINE_SEN_5      -1
-#define LINE_SEN_6      -1
-#define LINE_SEN_7      -1
 
 
 /** Global Variables/Instances */
@@ -67,7 +57,7 @@ PWMServo motorCatcher;
 PWMServo motorLauncher;
 IntervalTimer timerLoop;
 
-/** */
+/**  */
 void setup(void) {
 
   // serial is already setup
@@ -102,8 +92,6 @@ void setup(void) {
   rangeSen.startContinuous();
   rangeMux.selChannel(0);
   
-  // Set up line sensors
-
   // set up motor control loop
   timerLoop.begin(controlLoop, 1000000UL/RATE);
 

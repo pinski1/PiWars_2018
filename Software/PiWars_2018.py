@@ -1,18 +1,63 @@
 #!/usr/bin/env python3
-from time import sleep
+import time
+import threading
+#import Adafruit_SSD1306 # import OLED display
 
+# import communications library
 import FirstLook
-# import autonomous challenge specific code, no need to import remote controlled challenges
-import auto_MinimalMaze
-import auto_Rainbow
-import auto_SpeedTest
 
-from approxeng.input.selectbinder import ControllerResource # joystick cotrol code
-#import OLED display code
-# set up basic controls
-# allow for menu navigation via joystick
+# import challenge classes
+from rainbow import Rainbow_Challenge
+from speed import Speed_Challenge
+from maze import Maze_Challenge
+from manual import Manual_Challenge
 
-with ControllerResource() as joystick:
-    while joystick.connected:
-        # do stuff
-		print("Stuff")
+from approxeng.input.selectbinder import ControllerResource # import approx eng's joystick code
+
+
+
+
+
+def start_challenge(new_challenge):
+    """ start a challenge
+        first check to make sure there are no other challenges running
+        start challenge"""
+    
+    
+
+
+def stop_challenge(self, running_challenge):
+    """ stop the running challenge
+        make sure there are no other challenges running"""
+
+
+
+
+while True:
+    try:
+        with ControllerResource() as joystick:
+            print('Found a joystick and connected')
+            while joystick.connected:
+                # Do stuff with your joystick here!
+                # ....
+                # ....
+        # Joystick disconnected...
+        print('Connection to joystick lost')
+    except IOError:
+        # No joystick found, wait for a bit before trying again
+        print('Unable to find any joysticks')
+        sleep(1.0)
+        
+
+
+
+
+
+""" to do:
+        GUI management
+        thread management
+        joystick management
+        FirstLook management
+        error handling
+        
+
