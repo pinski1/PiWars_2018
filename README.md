@@ -6,16 +6,16 @@ https://piwars.org/2018-competition/
 
 ### Electronics
 Parts list:
-* Raspberry Pi 3
-  * Adafruit PiOLED
-  * Raspberry Pi Camera
-* Teensy 3.2
-  * 3x AS5048A encoders
-  * 3x ZTW Spider 30A Opto Small
-  * 2x Turnigy XK2445-4700kv & 47:1 25mm gearbox
-  * 1x V-Spec 2205-2350kv & 2040:1 25mm gearbox
-  * 4x VL53L0X ToF ranger finders
- * Matek power distribution and convertor
+* [Raspberry Pi 3](https://www.raspberrypi.org/documentation/hardware/raspberrypi/README.md)
+  * [Adafruit PiOLED](https://www.adafruit.com/product/3527)
+  * [Raspberry Pi Camera](https://www.raspberrypi.org/documentation/hardware/camera/)
+* [Teensy 3.2](https://www.pjrc.com/store/teensy32.html)
+  * 3x [AS5048A encoders](https://www.aliexpress.com/item/Magnetic-Encoder-AS5048A-for-Alexmos-BaseCam-Electronics-Gimbal-Controller-and-Brushless-Gimbal-Motor/32834461450.html)
+  * 3x [ZTW Spider 30A Opto Small](https://hobbyking.com/en_us/ztw-spider-series-30a-small-opto-multi-rotor-esc-2-6s-simonk-firmware.html)
+  * 2x [Turnigy XK2445-4700kv](https://hobbyking.com/en_us/turnigy-xk2445-4700kv-brushless-inrunner.html) & 47:1 25mm gearbox
+  * 1x [V-Spec 2205-2350kv](https://hobbyking.com/en_us/2205-2350kv-ccw-v-spec-mongoose.html) & 2040:1 25mm gearbox
+  * 4x [VL53L0X ToF ranger finders](https://www.pololu.com/product/2490)
+ * [Matek PDB-XT60](http://www.mateksys.com/?portfolio=pdb-xt60)
  * Lithium Polymer battery, 3 cell 1000mAh
 
 ### Chassis
