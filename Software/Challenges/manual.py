@@ -10,7 +10,7 @@ class Manual_Challenge(Challenge):
     def run(self):
         print("Manual Mode")
         
-        while True:
+        #while True:
             
             # check to see timeout flag hasn't elapsed
             # check to see emergency stop hasn't been triggered

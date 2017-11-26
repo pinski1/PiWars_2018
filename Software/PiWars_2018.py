@@ -19,6 +19,8 @@ def start_challenge(new_challenge):
     """ start a challenge
         first check to make sure there are no other challenges running
         start challenge"""
+		
+		running_challenge = new_challenge
     
     
 
@@ -34,6 +36,8 @@ disp.begin()
 
 disp.clear()
 disp.display()
+
+start_challenge(Maze_Challenge)
 
 
 
