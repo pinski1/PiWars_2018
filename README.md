@@ -16,7 +16,7 @@ Parts list:
   * 1x [V-Spec 2205-2350kv](https://hobbyking.com/en_us/2205-2350kv-ccw-v-spec-mongoose.html) & 2040:1 25mm gearbox
   * 4x [VL53L0X ToF ranger finders](https://www.pololu.com/product/2490)
  * [Matek PDB-XT60](http://www.mateksys.com/?portfolio=pdb-xt60)
-  * Includes 100k & 30k resistor divider for voltage monitoring
+   * Includes 100k & 30k resistor divider for voltage monitoring
  * Lithium Polymer battery, 3 cell 1000mAh
 
 ### Chassis
