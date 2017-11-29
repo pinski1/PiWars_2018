@@ -13,7 +13,6 @@
 #include <SPI.h>
 #include "AS5048A.h"
 #include <Wire.h>
-#include "PCA9546.h"
 #include "VL53L0X.h"
 #include <PWMServo.h>
 #include "Command.h"
@@ -24,12 +23,14 @@
 #define SERVO_MAX 1832
 #define RATE 100
 // PID values
+#define SEN_TOF_ADDR  0x10 // base address
+#define VMON_RATIO    1  // multiply analog reading by this for battery voltage in microvolts
 
 
 /** Pin Map */
-#define I2C_SDA         A4 // I2C clock
+#define I2C_SDA         A4 // I2C data
 #define I2C_SCL         A5 // I2C clock
-#define I2C_RST         -1 // reset all I2C mux devices
+#define I2C_INT         -1 // I2C alert
 #define SPI_MOSI        11
 #define SPI_MISO        12
 #define SPI_SCK         13
@@ -41,12 +42,13 @@
 #define SERVO_OUT_2     -1 // arm motor
 #define SERVO_OUT_3     -1 // ball catcher
 #define SERVO_OUT_4     -1 // ball launcher
-
+static int range_sensor_en[4] = {-1, -1, -1, -1}; // rangefinder enables
+#define VBAT_MON     -1
 
 /** Global Variables/Instances */
 volatile int countsLeft, countsRights, angleArm;
-PCA9546 rangeMux;
-VL53L0X rangeSen;
+CommandParser  cmdParse;
+VL53L0X range_sensor[4] = {VL53L0X(), VL53L0X(), VL53L0X(), VL53L0X()};
 AS5048A encoderLeft(SPI_CS_0);
 AS5048A encoderRight(SPI_CS_1);
 AS5048A encoderArm(SPI_CS_2);
@@ -57,12 +59,21 @@ PWMServo motorCatcher;
 PWMServo motorLauncher;
 IntervalTimer timerLoop;
 
+/*********************************************
+  Default command handler
+ *********************************************/
+void unrecognised(void) {
+  Serial.println("Message unrecognised.");
+}
+
 /**  */
 void setup(void) {
 
-  // serial is already setup
+  Serial.begin(115200); // serial is already setup
   Wire.begin();
   SPI.begin();
+  
+  pinMode(VBAT_MON, INPUT);
 
   Serial.println("Starting FirstLook MCU...");
 
@@ -80,17 +91,35 @@ void setup(void) {
   motorCatcher.write(90);
   motorLauncher.write(90);
 
+  // checking for AS5048A
+  encoderLeft.getErrors();
+  encoderRight.getErrors();
+  encoderArms.getErrors();
+  
   // reset encoders to 0
   encoderLeft.getCounts();
   encoderRight.getCounts();
   encoderArm.setAngle(ARM_ZERO);
 
-  // Set up VL53L0Xs
-  rangeMux.selChannel(CHAN_1 || CHAN_2 || CHAN_3 || CHAN_4); // set PCA9546A to all
-  rangeSen.init(); // set up VL53L0X, continuous ranging
-  rangeSen.setTimeout(500);
-  rangeSen.startContinuous();
-  rangeMux.selChannel(0);
+  // turn off all range sensors
+  for (int i = 0; i < 4; i++)
+  {
+    pinMode(range_sensor_en[i], OUTPUT);
+    digitalWrite(range_sensor_en[i], LOW);
+  }
+
+  // initialise sensors and change address
+  for (int i = 0; i < 4; i++)
+  {
+    digitalWrite(range_sensor_en[i], HIGH);
+    range_sensor[i].init();
+    range_sensor[i].setAddress(SEN_TOF_ADDR + (2 * i));
+    range_sensor[i].setTimeout(500);
+    range_sensor[i].startContinuous();
+  }
+  
+  // add commands to parser
+  cmdParse.AddDefaultCallback(unrecognised);
   
   // set up motor control loop
   timerLoop.begin(controlLoop, 1000000UL/RATE);
@@ -102,7 +131,18 @@ void loop(void) {
   
 }
 
-/** motor control loop */
+/*********************************************
+  Called when data is available to read
+ *********************************************/
+void serialEvent(void) {
+
+  cmdParse.ReadSerial();
+
+}
+
+/*********************************************
+  Motor control loop
+ *********************************************/
 void controlLoop(void) {
 
   // grab current positions of motors & arm
@@ -120,6 +160,4 @@ void controlLoop(void) {
   //motorArm.write(90);
   
 }
-
-/* Mux handler */
 
