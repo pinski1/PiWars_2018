@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import time
 import threading
-import Adafruit_SSD1306 # import OLED display
-from approxeng.input.selectbinder import ControllerResource # import approx eng's joystick code
+#import Adafruit_SSD1306 # import OLED display
+#from approxeng.input.selectbinder import ControllerResource # import approx eng's joystick code
 
 # import communications library
 import FirstLook
@@ -13,34 +13,38 @@ from rainbow import Rainbow_Challenge
 from speed import Speed_Challenge
 from maze import Maze_Challenge
 
+threads = []
 
 
 def start_challenge(new_challenge):
     """ start a challenge
         first check to make sure there are no other challenges running
         start challenge"""
-		
-		running_challenge = new_challenge
     
+
+    running_challenge = threading.Thread(target=new_challenge.run())
+    threads.append(running_challenge)
+    running_challenge.start()
     
 
 
-def stop_challenge(self, running_challenge):
+#def stop_challenge():
     """ stop the running challenge
         make sure there are no other challenges running"""
 
+
 # 128x32 display with hardware I2C:
-disp = Adafruit_SSD1306.SSD1306_128_32(rst=None)
+#disp = Adafruit_SSD1306.SSD1306_128_32(rst=None)
 
-disp.begin()
+#disp.begin()
 
-disp.clear()
-disp.display()
+#disp.clear()
+#disp.display()
 
-start_challenge(Maze_Challenge)
+start_challenge(Rainbow_Challenge(None, None))
 
 
-
+"""
 while True:
     try:
         with ControllerResource() as joystick:
@@ -56,7 +60,7 @@ while True:
         print('Unable to find any joysticks')
         sleep(1.0)
         
-
+"""
 
 
 
@@ -69,3 +73,4 @@ while True:
         error handling
         
 
+"""

@@ -5,7 +5,7 @@ from base import Challenge
 class Manual_Challenge(Challenge):
     """Allow user to manually drive the robot around. For both practice and manual challenges."""
     
-    self.timeout = 0 # never times out
+    timeout = 0 # never times out
         
     def run(self):
         print("Manual Mode")
@@ -18,7 +18,7 @@ class Manual_Challenge(Challenge):
             # accept joystick commands
             
             # forward onto FirstLook instance
-            
+        return
 
 
 if __name__ == "__main__":
