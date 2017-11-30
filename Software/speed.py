@@ -6,6 +6,16 @@ class Speed_Challenge(Challenge):
     
     def run(self):
         print("Speed run")
+        
+        """
+        steps:
+            wait for go
+            full speed
+            keep motors even
+            keep centered between left & right sensors
+            
+            once > 8500mm traveled stop motors
+        """
     
 
 
