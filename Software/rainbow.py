@@ -1,37 +1,14 @@
 #!/usr/bin/env python3
-
-from base import Challenge
-
-class Rainbow_Challenge(Challenge):
+"""
+    Autonomous code for Somewhere Over The Rainbow
+    http://piwars.org/2018-competition/challenges/somewhere-over-the-rainbow/
     
-    def run(self):
-        print("Rainbow Road")
-        
-        """
-        steps:
-            turn 45degrees
-            drive to one corner
-                keep ?? mm from side wall
-                until ?? mm from front wall
-            turn 135degrees
-            drive to next corner
-                keep ?? mm from side wall
-                until ?? mm from front wall
-            turn 90 degrees
-            drive to next corner
-                keep ?? mm from side wall
-                until ?? mm from front wall
-            turn 90 degrees
-            drive to next corner
-                keep ?? mm from side wall
-                until ?? mm from front wall
-            turn 45 degrees
-            drive to center
-                until ?? mm traveled
-            turn 45 degrees
-        """
-    
+    Approach:
+        Goal is to drive a rounded square
+        the rounded corners will be <24cm away from the corners
+"""
 
-if __name__ == "__main__":
-    print("Running rainbow challenge class")
+class Rainbow:
 
+    def __init__:
+        print("Rainbow")

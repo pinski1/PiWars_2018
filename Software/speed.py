@@ -1,23 +1,16 @@
 #!/usr/bin/env python3
-
-from base import Challenge
-
-class Speed_Challenge(Challenge):
+"""
+    Autonomous code for Straight Line Speed Test
+    http://piwars.org/2018-competition/challenges/straight-line-speed-test/
     
-    def run(self):
-        print("Speed run")
-        
-        """
-        steps:
-            wait for go
-            full speed
-            keep motors even
-            keep centered between left & right sensors
-            
-            once > 8500mm traveled stop motors
-        """
-    
+    Approach:
+    accelerate to 100% throttle
+    keep encoders even
+    use distance sensors to keep on centerline
+    After 8m or if front sensors detects something, stop
+"""
 
+class Speed:
 
-if __name__ == "__main__":
-    print("Running speed challenge class")
+    def __init__:
+        print("Speed")

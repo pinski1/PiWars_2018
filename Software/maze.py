@@ -1,39 +1,17 @@
 #!/usr/bin/env python3
-
-from base import Challenge
-
-class Maze_Challenge(Challenge):
+"""
+    Autonomous code for simple maze solving
+    http://piwars.org/2018-competition/challenges/the-minimal-maze/
     
-    def run(self):
-        print("Maze")
-        print("Input device is" + self.input_device)
-        
-        """
-        steps:
-        drive forward
-            distance ?? mm from left wall
-            until ?? mm from forward wall
-        drive 90degree right
-        drive foward
-            distance ?? mm from left wall
-            until ?? mm from forward wall
-        drive 180degree right
-        drive forward
-            distance ?? mm from left wall
-            until ?? mm from forward wall
-        drive 180degree left
-        drive forward
-            distance ?? mm from left wall
-            until ?? mm from forward wall
-        drive 90degree left
-        drive foward
-            distance ?? mm from left wall
-            when left wall disappears, continue for 200mm
-        stop
-        """
-        
-        #return
-        pass
+    Approach:
+        Follow RHS wall until it disappears, including RH turn
+        Do a fairly serious 180deg turn
+        Follow LHS wall until both walls disappear, including LH turn
+        However do not touch either wall at any point
+"""
 
-if __name__ == "__main__":
-    print("Running maze challenge class")
+class Maze:
+
+    def __init__:
+        print("Minimal Maze")
+    
