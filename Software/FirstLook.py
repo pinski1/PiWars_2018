@@ -132,11 +132,14 @@ class FirstLook:
         # internal method for OLED writing
         # internal method for PCA9685 writing
         # internal method for AS5048A reading
-        # internal method for VL53L0X reading
         # internal method for INA219 reading
-
-
-
+        
+    def get_range(self):
+        dist_1 = self.distance_sensors[1].get_distance()
+        dist_2 = self.distance_sensors[2].get_distance()
+        dist_3 = self.distance_sensors[3].get_distance()
+        
+        return dist_1, dist_2, dist_3
 
 if __name__ == "__main__":
     print("Running FirstLook interface library self-test")
